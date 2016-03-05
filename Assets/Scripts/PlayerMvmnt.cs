@@ -76,6 +76,13 @@ public class PlayerMvmnt : MonoBehaviour
             points += 10;
             cam.transform.position += new Vector3(0, 0, -0.5f);
         }
+        if (other.gameObject.CompareTag("DmgPlayer")) 
+        {
+            Destroy(other.gameObject);
+            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+            points -= 10;
+            cam.transform.position -= new Vector3(0, 0, -0.5f);
+        }
 
     }
 }
