@@ -123,7 +123,7 @@ public class PlayerMvmnt : MonoBehaviour
 
         //DownwardsDraft();
 
-        if (Input.GetKey(KeyCode.Joystick1Button5))
+        if (Input.GetKey(KeyCode.Joystick1Button5) ||Input.GetKey(KeyCode.D))
         {
             if (chargeCD >= 10)
             {
