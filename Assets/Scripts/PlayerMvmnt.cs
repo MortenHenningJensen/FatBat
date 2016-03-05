@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerMvmnt : MonoBehaviour
 {
-
+    Animator myAnimator;
     public Rigidbody myRigidbody;
     //public Rigidbody rightWing;
     // public Rigidbody leftWing;
@@ -60,8 +60,9 @@ public class PlayerMvmnt : MonoBehaviour
 
                leftRdy = true;
                transform.Rotate(0, 0, Input.GetAxis("Left_P1"));
-               //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;              
-            
+            //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f; 
+            //myAnimator.SetFloat("LeftWing", -0.2f);
+
         }
         if (p1Left >= 0.2)
 	    {
@@ -69,7 +70,7 @@ public class PlayerMvmnt : MonoBehaviour
 	        {
                 myRigidbody.AddRelativeForce(Vector3.up * movementSpeed);
                 //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
-		   
+                myAnimator.SetFloat("LeftWing", 0.2f);
             leftRdy = false;
 	        }
             else
@@ -82,16 +83,18 @@ public class PlayerMvmnt : MonoBehaviour
 
                 rightRdy = true;
                 transform.Rotate(0, 0, -(Input.GetAxis("Right_P1")));
-                //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
+            //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
+            myAnimator.SetFloat("RightWing", p1Right);
         }
         if (p1Right >= 0.2)
 	    {
 		    if (rightRdy == true)
 	        {
                 myRigidbody.AddRelativeForce(Vector3.up * movementSpeed);
-		    
-            //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
-            rightRdy = false;
+                myAnimator.SetFloat("RightWing", p1Right);
+
+                //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
+                rightRdy = false;
 	        }
             else
 	        {
@@ -123,6 +126,8 @@ public class PlayerMvmnt : MonoBehaviour
             {
                 myRigidbody.AddRelativeForce(Vector3.up * movementSpeed * powerForce);
                 chargeCD = 0;
+                myAnimator.SetFloat("RightWing", p1Right);
+                myAnimator.SetFloat("LeftWing", p1Left);
             }
             else
             {
