@@ -25,10 +25,13 @@ public class Player2Mvmnt : MonoBehaviour
 
     public Text txtPoints;
 
+    [SerializeField]
+    private float powerForce;
 
     // Use this for initialization
     void Start()
     {
+        powerForce = 2;
         movementSpeed = 20;
         friction = 0.95f;
         chargeCD = 10;
@@ -99,7 +102,7 @@ public class Player2Mvmnt : MonoBehaviour
         {
             if (chargeCD >= 10)
             {
-                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed * 2);
+                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed * powerForce);
                 chargeCD = 0;
             }
             else
@@ -115,6 +118,7 @@ public class Player2Mvmnt : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
+            powerForce += 0.5f;
             Destroy(other.gameObject);
             myRigidbody.mass += 0.1f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
@@ -133,14 +137,23 @@ public class Player2Mvmnt : MonoBehaviour
         }
         if (other.gameObject.CompareTag("DmgPlayer"))
         {
-            Destroy(other.gameObject);
-            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
-            points -= 10;
-            cam.transform.position -= new Vector3(0, 0, -0.5f);
+            if (points > 0)
+            {
+                powerForce -= 0.5f;
+                myRigidbody.mass -= 0.1f;
+                Destroy(other.gameObject);
 
-            colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
-            colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
-            colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
+                points -= 10;
+                cam.transform.position -= new Vector3(0, 0, -0.5f);
+                transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+                colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
+                colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
+                colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
+            }
+            else
+            {
+                points = 0;
+            }
         }
     }
 

@@ -163,15 +163,23 @@ public class PlayerMvmnt : MonoBehaviour
         }
         if (other.gameObject.CompareTag("DmgPlayer"))
         {
+            if (points > 0)
+            {
+            powerForce -= 0.5f;
+            myRigidbody.mass -= 0.1f;
             Destroy(other.gameObject);
-            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+
             points -= 10;
             cam.transform.position -= new Vector3(0, 0, -0.5f);
-
+            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
             colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
             colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
             colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
-
+            }
+            else
+            {
+                points = 0;
+            }
         }
     }
 
