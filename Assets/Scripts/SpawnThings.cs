@@ -16,6 +16,7 @@ public class SpawnThings : MonoBehaviour {
 
     Random rnd;
 
+
     private float timer;
     private bool timeStarted = false;
     public Text txtTimer;
@@ -49,11 +50,11 @@ public class SpawnThings : MonoBehaviour {
         Destroy(pFab.gameObject, 10);
     }
 
-    void OnGUI()
-    {
-        int minutes = Mathf.FloorToInt(timer / 60F);
-        int seconds = Mathf.FloorToInt(timer - minutes * 60);
-        string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
-        txtTimer.text = niceTime;
-    }
+    //void OnGUI()
+    //{
+    //    int minutes = Mathf.FloorToInt(timer / 60F);
+    //    int seconds = Mathf.FloorToInt(timer - minutes * 60);
+    //    string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+    //    txtTimer.text = niceTime;
+    //}
 }

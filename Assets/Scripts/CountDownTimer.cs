@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CountDownTimer : MonoBehaviour {
 
@@ -11,8 +12,16 @@ public class CountDownTimer : MonoBehaviour {
     private float timeLabelBoxWidth;
     private float timeLabelBoxHeight;
 
+    public Canvas endScreen;
+    public Button restartGame;
+    public Button menu;
+
     // Use this for initialization
     void Start () {
+        restartGame.enabled = false;
+        menu.enabled = false;
+        endScreen.enabled = false;
+
         timeRemaining = 10;
         timeLabelBoxWidth = 200;
         timeLabelBoxHeight = 100;
@@ -24,6 +33,10 @@ public class CountDownTimer : MonoBehaviour {
 	void Update () {
         timeRemaining -= Time.deltaTime;
 
+        if (timeRemaining <= 0)
+        {
+            endScreen.enabled = true;
+        }
 	}
 
     void OnGUI()
@@ -41,5 +54,15 @@ public class CountDownTimer : MonoBehaviour {
             GUI.Label(new Rect(scrWidth, scrHeight, timeLabelBoxWidth, timeLabelBoxHeight), "Time's Up!", centeredStyle);
             Time.timeScale = 0; //Spillet er sat på pause
         }
+    }
+
+    public void MenuGame()
+    {
+        Application.LoadLevel(0);
+    }
+
+    public void RestartGame()
+    {
+        Application.LoadLevel(2);
     }
 }
