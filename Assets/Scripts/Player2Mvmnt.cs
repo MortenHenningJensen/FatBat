@@ -19,7 +19,7 @@ public class Player2Mvmnt : MonoBehaviour
 
     public Transform[] colliders = new Transform[3];
 
-    private int points;
+    public int points;
 
     public Camera cam;
 
