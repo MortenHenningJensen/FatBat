@@ -25,6 +25,7 @@ public class SpawnThings : MonoBehaviour {
         // Spawn();
         // rndSpawnPos = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(30, 50));
         InvokeRepeating("Spawn", 1, 2);
+        timer = 120;
         timeStarted = true;
     }
 
@@ -34,7 +35,7 @@ public class SpawnThings : MonoBehaviour {
         // Spawn();
         if (timeStarted == true)
         {
-            timer += Time.deltaTime;
+            timer -= Time.deltaTime;
         }
 
     }
