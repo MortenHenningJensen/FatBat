@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerMvmnt : MonoBehaviour
 {
@@ -16,9 +17,14 @@ public class PlayerMvmnt : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 100;
 
+    public Transform[] colliders = new Transform[3];
+
     private int points;
 
     public Camera cam;
+
+    public Text txtPoints;
+
 
     // Use this for initialization
     void Start()
@@ -29,6 +35,7 @@ public class PlayerMvmnt : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+<<<<<<< HEAD
         float p1Left = Input.GetAxisRaw("Left_P1");
         float p1Right = Input.GetAxisRaw("Right_P1");
         
@@ -36,6 +43,11 @@ public class PlayerMvmnt : MonoBehaviour
 
         //transform.Rotate(0, 0, Input.GetAxis("Left_P1"));
         //transform.Rotate(0, 0, -(Input.GetAxis("Right_P1")));
+=======
+        txtPoints.text = "Player 1 Points: " + points.ToString();
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+>>>>>>> c035d27dcd820872325462b268e454be46c59e6b
 
         if (p1Left <= -0.2)
         {
@@ -129,12 +141,42 @@ public class PlayerMvmnt : MonoBehaviour
             Destroy(other.gameObject);
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
-            cam.transform.position += new Vector3(0, 0, -1);
+            cam.transform.position += new Vector3(0, 0, -0.5f);
+
+            colliders[0].transform.position += new Vector3(-1, -1, 0);
+            colliders[1].transform.position += new Vector3(1, 1, 0);
+            colliders[2].transform.position += new Vector3(1, 1, 0);
+
+            colliders[0].transform.localScale += new Vector3(0, 5, 0);
+            colliders[1].transform.localScale += new Vector3(0, 5, 0);
+            colliders[2].transform.localScale += new Vector3(5, 0, 0);
+
+
+        }
+        if (other.gameObject.CompareTag("DmgPlayer"))
+        {
+            Destroy(other.gameObject);
+            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+            points -= 10;
+            cam.transform.position -= new Vector3(0, 0, -0.5f);
+
+            colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
+            colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
+            colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
+
         }
 
+        if (other.gameObject.CompareTag("Border"))
+        {
+            this.points -= 10;
+        }
     }
+    }
+<<<<<<< HEAD
     void DownwardsDraft()
     {
         transform.position -= new Vector3(0, 0.05f, 0);
     }
 }
+=======
+>>>>>>> c035d27dcd820872325462b268e454be46c59e6b

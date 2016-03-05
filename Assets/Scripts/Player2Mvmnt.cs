@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player2Mvmnt : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class Player2Mvmnt : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 10;
 
+    public Transform[] colliders = new Transform[3];
+
     private int points;
 
     public Camera cam;
+
+    public Text txtPoints;
+
 
     // Use this for initialization
     void Start()
@@ -24,6 +30,8 @@ public class Player2Mvmnt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        txtPoints.text = "Player 2 Points: " + points.ToString();
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
@@ -76,6 +84,33 @@ public class Player2Mvmnt : MonoBehaviour
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
             cam.transform.position += new Vector3(0, 0, -1);
+
+            colliders[0].transform.position += new Vector3(-1, -1, 0);
+            colliders[1].transform.position += new Vector3(1, 1, 0);
+            colliders[2].transform.position += new Vector3(1, 1, 0);
+
+            colliders[0].transform.localScale += new Vector3(0, 5, 0);
+            colliders[1].transform.localScale += new Vector3(0, 5, 0);
+            colliders[2].transform.localScale += new Vector3(5, 0, 0);
+
+        }
+
+        if (other.gameObject.CompareTag("DmgPlayer"))
+        {
+            Destroy(other.gameObject);
+            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+            points -= 10;
+            cam.transform.position -= new Vector3(0, 0, -0.5f);
+
+            colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
+            colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
+            colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
+
+        }
+
+        if (other.gameObject.CompareTag("Border"))
+        {
+            this.points -= 10;
         }
 
     }
