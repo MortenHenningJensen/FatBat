@@ -8,9 +8,14 @@ public class Player2Mvmnt : MonoBehaviour
     public Rigidbody myRigidbody;
     //public Rigidbody rightWing;
     // public Rigidbody leftWing;
-    private int chargeCD = 10;
+    private int chargeCD;
+    private bool leftRdy = false;
+    private bool rightRdy = false;
+    private bool wingUpLeft = false;
+    private float friction;
+    private bool wingUpRight = false;
     [SerializeField]
-    private float movementSpeed = 10;
+    private float movementSpeed;
 
     public Transform[] colliders = new Transform[3];
 
@@ -24,39 +29,77 @@ public class Player2Mvmnt : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        movementSpeed = 20;
+        friction = 0.95f;
+        chargeCD = 10;
+        myRigidbody.mass = 0.1f;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+
+        float p2Left = Input.GetAxisRaw("Left_P2");
+        float p2Right = Input.GetAxisRaw("Right_P2");
+
+        //float translate = movementSpeed * Time.deltaTime;
+
+        //transform.Rotate(0, 0, Input.GetAxis("Left_P1"));
+        //transform.Rotate(0, 0, -(Input.GetAxis("Right_P1")));
+
         txtPoints.text = "Player 2 Points: " + points.ToString();
+//        float horizontal = Input.GetAxisRaw("Horizontal");
+//        float vertical = Input.GetAxisRaw("Vertical");
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.Joystick2Button5))
-        {
-            transform.Rotate(0, 0, 5);
-            transform.position += transform.up * Time.deltaTime * movementSpeed;
-
-        }
-
-        if (Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.Joystick2Button4))
+        if (p2Left <= -0.2)
         {
 
-            transform.Rotate(0, 0, -5);
-            transform.position += transform.up * Time.deltaTime * movementSpeed;
+            leftRdy = true;
+            transform.Rotate(0, 0, Input.GetAxis("Left_P2"));
+            //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;              
 
         }
+        if (p2Left >= 0.2)
+        {
+            if (leftRdy == true)
+            {
+                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed);
+                //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
 
-        transform.position -= new Vector3(0, 0.1f, 0);
+                leftRdy = false;
+            }
+            else
+            {
 
-        if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.Joystick2Button0))
+            }
+        }
+        if (p2Right <= -0.2)
+        {
+
+            rightRdy = true;
+            transform.Rotate(0, 0, -(Input.GetAxis("Right_P2")));
+            //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
+        }
+        if (p2Right >= 0.2)
+        {
+            if (rightRdy == true)
+            {
+                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed);
+
+                //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
+                rightRdy = false;
+            }
+            else
+            {
+
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Joystick2Button5))
         {
             if (chargeCD >= 10)
             {
-                transform.position += transform.up * Time.deltaTime * 100;
+                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed * 2);
                 chargeCD = 0;
             }
             else
@@ -66,14 +109,6 @@ public class Player2Mvmnt : MonoBehaviour
         }
         chargeCD++;
 
-
-        // myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
-        // myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, vertical * movementSpeed);
-        //if (Input.GetButton("Jump"))
-        //{
-        //    transform.position += transform.up * Time.deltaTime * movementSpeed;
-        //}
-
     }
 
     void OnTriggerEnter(Collider other)
@@ -81,20 +116,21 @@ public class Player2Mvmnt : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             Destroy(other.gameObject);
+            myRigidbody.mass += 0.1f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
-            cam.transform.position += new Vector3(0, 0, -1);
+            cam.transform.position += new Vector3(0, 0, -0.5f);
 
-            colliders[0].transform.position += new Vector3(-1, -1, 0);
-            colliders[1].transform.position += new Vector3(1, 1, 0);
-            colliders[2].transform.position += new Vector3(1, 1, 0);
+            colliders[0].transform.position += new Vector3(-0.5f, -0.5f, 0);
+            colliders[1].transform.position += new Vector3(0.5f, 0.5f, 0);
+            colliders[2].transform.position += new Vector3(0.5f, 0.5f, 0);
 
             colliders[0].transform.localScale += new Vector3(0, 5, 0);
             colliders[1].transform.localScale += new Vector3(0, 5, 0);
             colliders[2].transform.localScale += new Vector3(5, 0, 0);
 
-        }
 
+        }
         if (other.gameObject.CompareTag("DmgPlayer"))
         {
             Destroy(other.gameObject);
@@ -105,13 +141,15 @@ public class Player2Mvmnt : MonoBehaviour
             colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
             colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
             colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
-
         }
+    }
 
+    void OnCollision(Collision other)
+    {
         if (other.gameObject.CompareTag("Border"))
         {
             this.points -= 10;
         }
-
     }
 }
+
