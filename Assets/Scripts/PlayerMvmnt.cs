@@ -7,7 +7,7 @@ public class PlayerMvmnt : MonoBehaviour
     public Rigidbody myRigidbody;
     //public Rigidbody rightWing;
     // public Rigidbody leftWing;
-
+    private int chargeCD = 10;
     [SerializeField]
     private float movementSpeed = 10;
 
@@ -44,6 +44,19 @@ public class PlayerMvmnt : MonoBehaviour
 
         transform.position -= new Vector3(0, 0.1f, 0);
 
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Joystick1Button0))
+        {
+            if (chargeCD >= 10)
+            {
+                transform.position += transform.up * Time.deltaTime * 100;
+                chargeCD = 0;
+            }
+            else
+            {
+                    
+            }
+        }
+        chargeCD++;
 
         // myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
         // myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, vertical * movementSpeed);
