@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player2Mvmnt : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Player2Mvmnt : MonoBehaviour
 
     public Camera cam;
 
+    public Text txtPoints;
+
+
     // Use this for initialization
     void Start()
     {
@@ -26,6 +30,8 @@ public class Player2Mvmnt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        txtPoints.text = "Player 2 Points: " + points.ToString();
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
