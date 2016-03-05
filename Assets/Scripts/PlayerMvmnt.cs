@@ -103,8 +103,7 @@ public class PlayerMvmnt : MonoBehaviour
 
         if (other.gameObject.CompareTag("Border"))
         {
-            Debug.Log("Collision");
-            Destroy(this.gameObject);
+            this.points -= 10;
         }
     }
     }
