@@ -25,7 +25,7 @@ public class SpawnThings : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        rndSpawnPos = new Vector3(Random.Range(-20, 20), Random.Range(5, 20), Random.Range(30, 50));
+        rndSpawnPos = new Vector3(Random.Range(-30, 30), Random.Range(5, 20), Random.Range(30, 70));
        // Spawn();
 
     }

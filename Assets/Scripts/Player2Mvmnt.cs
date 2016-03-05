@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMvmnt : MonoBehaviour
+public class Player2Mvmnt : MonoBehaviour
 {
 
     public Rigidbody myRigidbody;
@@ -27,14 +27,14 @@ public class PlayerMvmnt : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Joystick1Button5))
+        if (Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.Joystick2Button5))
         {
             transform.Rotate(0, 0, 5);
             transform.position += transform.up * Time.deltaTime * movementSpeed;
 
         }
 
-        if (Input.GetKey(KeyCode.E)  || Input.GetKey(KeyCode.Joystick1Button4))
+        if (Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.Joystick2Button4))
         {
 
             transform.Rotate(0, 0, -5);
@@ -44,7 +44,7 @@ public class PlayerMvmnt : MonoBehaviour
 
         transform.position -= new Vector3(0, 0.1f, 0);
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Joystick1Button0))
+        if (Input.GetKey(KeyCode.O) || Input.GetKey(KeyCode.Joystick2Button0))
         {
             if (chargeCD >= 10)
             {
@@ -53,10 +53,11 @@ public class PlayerMvmnt : MonoBehaviour
             }
             else
             {
-                    
+
             }
         }
         chargeCD++;
+
 
         // myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
         // myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, vertical * movementSpeed);
@@ -74,14 +75,7 @@ public class PlayerMvmnt : MonoBehaviour
             Destroy(other.gameObject);
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
-            cam.transform.position += new Vector3(0, 0, -0.5f);
-        }
-        if (other.gameObject.CompareTag("DmgPlayer")) 
-        {
-            Destroy(other.gameObject);
-            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
-            points -= 10;
-            cam.transform.position -= new Vector3(0, 0, 1);
+            cam.transform.position += new Vector3(0, 0, -1);
         }
 
     }
