@@ -27,14 +27,14 @@ public class PlayerMvmnt : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.Joystick1Button5))
         {
             transform.Rotate(0, 0, 5);
             transform.position += transform.up * Time.deltaTime * movementSpeed;
 
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E)  || Input.GetKey(KeyCode.Joystick1Button4))
         {
 
             transform.Rotate(0, 0, -5);
