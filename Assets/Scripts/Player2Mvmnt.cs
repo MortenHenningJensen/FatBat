@@ -98,7 +98,7 @@ public class Player2Mvmnt : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Joystick2Button5))
+        if (Input.GetKey(KeyCode.Joystick2Button5) || Input.GetKey(KeyCode.K))
         {
             if (chargeCD >= 10)
             {
