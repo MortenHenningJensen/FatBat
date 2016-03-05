@@ -11,6 +11,10 @@ public class PlayerMvmnt : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 10;
 
+    private int points;
+
+    public Camera cam;
+
     // Use this for initialization
     void Start()
     {
@@ -47,6 +51,18 @@ public class PlayerMvmnt : MonoBehaviour
         //{
         //    transform.position += transform.up * Time.deltaTime * movementSpeed;
         //}
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            Destroy(other.gameObject);
+            transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
+            points += 10;
+            cam.transform.position += new Vector3(0, 0, -1);
+        }
 
     }
 }
