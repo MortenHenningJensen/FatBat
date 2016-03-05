@@ -123,7 +123,7 @@ public class Player2Mvmnt : MonoBehaviour
             myRigidbody.mass += 0.1f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
-            cam.transform.position += new Vector3(0, 0, -0.5f);
+            //cam.transform.position += new Vector3(0, 0, -0.5f);
 
             colliders[0].transform.position += new Vector3(-0.5f, -0.5f, 0);
             colliders[1].transform.position += new Vector3(0.5f, 0.5f, 0);
@@ -144,7 +144,7 @@ public class Player2Mvmnt : MonoBehaviour
                 Destroy(other.gameObject);
 
                 points -= 10;
-                cam.transform.position -= new Vector3(0, 0, -0.5f);
+                //cam.transform.position -= new Vector3(0, 0, -0.5f);
                 transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
                 colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
                 colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);

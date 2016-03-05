@@ -51,7 +51,7 @@ public class UIScriptManager : MonoBehaviour {
 
     public void NewGameClicked()
     {
-        PlayerPrefs.SetInt("PLayers", playerNumb); //Skal sætte det level man er i
+        PlayerPrefs.SetInt("Players", playerNumb); //Skal sætte det level man er i
 
         Application.LoadLevel("Main"); //Skal loadeden Scene, hvor man kan vælge flagermus
     }

@@ -19,7 +19,7 @@ public class CountDownTimer : MonoBehaviour
     void Start()
     {
         gameEnd = false;
-        timeRemaining = 5;
+        timeRemaining = 120;
         timeLabelBoxWidth = 400;
         timeLabelBoxHeight = 100;
         scrWidth = (Screen.width / 2) - (timeLabelBoxWidth / 2);

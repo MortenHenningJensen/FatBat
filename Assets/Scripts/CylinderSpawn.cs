@@ -21,7 +21,7 @@ public class CylinderSpawn : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        InvokeRepeating("Spawn", 1, 2);
+        InvokeRepeating("Spawn", 5, 3);
 
     }
 
@@ -38,9 +38,6 @@ public class CylinderSpawn : MonoBehaviour
 
         pFab.velocity = new Vector3(0, 0, -5);
         pFab.transform.Rotate(0, 0, Random.Range(0, 360));
-
-
-
 
         Destroy(pFab.gameObject, 15);
     }

@@ -8,6 +8,9 @@ public class SpawnThings : MonoBehaviour {
     Rigidbody kittyKat;
 
     [SerializeField]
+    private float spawnInterval;
+
+    [SerializeField]
     Transform spawnPos;
 
     private Vector3 lookPos;
@@ -16,29 +19,15 @@ public class SpawnThings : MonoBehaviour {
 
     Random rnd;
 
-
-    private float timer;
-    private bool timeStarted = false;
-    public Text txtTimer;
-
     // Use this for initialization
     void Start () {
-        // Spawn();
-        // rndSpawnPos = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(30, 50));
-        InvokeRepeating("Spawn", 1, 2);
-        timer = 120;
-        timeStarted = true;
+        spawnInterval = 2;
+         InvokeRepeating("Spawn", 1, spawnInterval);
     }
 
     // Update is called once per frame
     void Update () {
         rndSpawnPos = new Vector3(Random.Range(-20, 20), Random.Range(-12, 6), Random.Range(30, 70));
-        // Spawn();
-        if (timeStarted == true)
-        {
-            timer -= Time.deltaTime;
-        }
-
     }
 
     void Spawn()
@@ -49,12 +38,4 @@ public class SpawnThings : MonoBehaviour {
 
         Destroy(pFab.gameObject, 10);
     }
-
-    //void OnGUI()
-    //{
-    //    int minutes = Mathf.FloorToInt(timer / 60F);
-    //    int seconds = Mathf.FloorToInt(timer - minutes * 60);
-    //    string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
-    //    txtTimer.text = niceTime;
-    //}
 }
