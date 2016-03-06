@@ -6,10 +6,13 @@ public class PlaneMovement : MonoBehaviour
     CountDownTimer cdt = new CountDownTimer();
     public Transform[] plane = new Transform[4];
 
+    [SerializeField]
+    private float speedPlane;
+
     // Use this for initialization
     void Start()
     {
-        
+        speedPlane = -0.2f;
     }
 
     // Update is called once per frame
@@ -17,10 +20,10 @@ public class PlaneMovement : MonoBehaviour
     {
         if (cdt.gameEnd == false)
         {
-            plane[0].transform.position += new Vector3(0, 0, -4);
-            plane[1].transform.position += new Vector3(0, 0, -4);
-            plane[2].transform.position += new Vector3(0, 0, -4);
-            plane[3].transform.position += new Vector3(0, 0, -4);
+            plane[0].transform.position += new Vector3(0, 0, speedPlane);
+            plane[1].transform.position += new Vector3(0, 0, speedPlane);
+            plane[2].transform.position += new Vector3(0, 0, speedPlane);
+            plane[3].transform.position += new Vector3(0, 0, speedPlane);
         }
         else
         {

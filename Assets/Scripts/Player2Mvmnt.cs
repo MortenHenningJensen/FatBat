@@ -30,7 +30,7 @@ public class Player2Mvmnt : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
+    { 
         powerForce = 2;
         movementSpeed = 20;
         friction = 0.95f;
@@ -145,7 +145,7 @@ public class Player2Mvmnt : MonoBehaviour
 
                 points -= 10;
                 //cam.transform.position -= new Vector3(0, 0, -0.5f);
-                transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+                transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
                 colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
                 colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);

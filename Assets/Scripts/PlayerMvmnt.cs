@@ -32,7 +32,6 @@ public class PlayerMvmnt : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         //colliders[0].position = new Vector3(cam.pixelWidth + 5,0,0);
         //colliders[1].position = new Vector3(cam.pixelHeight - cam.pixelHeight - 5, 0, 0);
         //colliders[2].position = new Vector3(0, cam.pixelHeight - cam.pixelHeight -5, 0);
@@ -178,7 +177,7 @@ public class PlayerMvmnt : MonoBehaviour
 
             points -= 10;
             //cam.transform.position -= new Vector3(0, 0, -0.5f);
-            transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
+            transform.localScale -= new Vector3(0.2f, 0.2f, 0);
             //colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
             //colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
             //colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);

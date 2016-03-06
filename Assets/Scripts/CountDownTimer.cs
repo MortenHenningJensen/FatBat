@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class CountDownTimer : MonoBehaviour
 {
+    private PlayerMvmnt pm1 = new PlayerMvmnt();
+    private Player2Mvmnt pm2 = new Player2Mvmnt();
 
     [SerializeField]
     private float timeRemaining;
@@ -14,10 +16,17 @@ public class CountDownTimer : MonoBehaviour
     private float timeLabelBoxHeight;
 
     public bool gameEnd;
+    public bool gameStart;
+
+    void Awake()
+    {
+
+    }
 
     // Use this for initialization
     void Start()
     {
+        Time.timeScale = 0;
         gameEnd = false;
         timeRemaining = 120;
         timeLabelBoxWidth = 400;
@@ -30,12 +39,22 @@ public class CountDownTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        timeRemaining -= Time.deltaTime;
-
-        if (timeRemaining <= 0)
+        if (!gameStart)
         {
-            gameEnd = true;
+            if (Input.GetKey(KeyCode.Joystick1Button0))
+            {
+                gameStart = true;
+                Time.timeScale = 1;
+            }
+        }
+        if (gameStart)
+        {
+            timeRemaining -= Time.deltaTime;
+
+            if (timeRemaining <= 0)
+            {
+                gameEnd = true;
+            }
         }
     }
 
@@ -90,13 +109,11 @@ public class CountDownTimer : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     void Replay()
     {
-        Application.LoadLevel(0);
+        Application.LoadLevel(1);
     }
 
     void BackToMenu()
