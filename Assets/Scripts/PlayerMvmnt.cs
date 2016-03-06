@@ -33,7 +33,6 @@ public class PlayerMvmnt : MonoBehaviour
     public AudioSource flap1;
     public AudioSource flap2;
     public AudioSource pickup;
-    //public AudioSource impact;
     public AudioSource badPickup;
     public AudioClip[] flaps;
 
@@ -114,6 +113,7 @@ public class PlayerMvmnt : MonoBehaviour
             myRigidbody.mass += 0.1f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
+            pickup.pitch = Random.Range(0.90f, 1.15f);
             pickup.Play();
         }
         if (other.gameObject.CompareTag("DmgPlayer"))
@@ -123,7 +123,7 @@ public class PlayerMvmnt : MonoBehaviour
             powerForce -= 0.5f;
             myRigidbody.mass -= 0.1f;
             Destroy(other.gameObject);
-                badPickup.Play();
+            badPickup.Play();
 
             points -= 10;
             transform.localScale -= new Vector3(0.2f, 0.2f, 0);

@@ -28,6 +28,12 @@ public class Player2Mvmnt : MonoBehaviour
     [SerializeField]
     private float powerForce;
 
+    public AudioSource flap1;
+    public AudioSource flap2;
+    public AudioSource pickup;
+    public AudioSource badPickup;
+    public AudioClip[] flaps;
+
     // Use this for initialization
     void Start()
     { 
@@ -68,6 +74,9 @@ public class Player2Mvmnt : MonoBehaviour
             {
                 myRigidbody2.AddRelativeForce(Vector3.up * movementSpeed);
                 //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
+                flap1.clip = flaps[Random.Range(0, flaps.Length)];
+                flap1.pitch = Random.Range(0.95f, 1.1f);
+                flap1.Play();
 
                 leftRdy = false;
             }
@@ -88,6 +97,9 @@ public class Player2Mvmnt : MonoBehaviour
             if (rightRdy == true)
             {
                 myRigidbody2.AddRelativeForce(Vector3.up * movementSpeed);
+                flap2.clip = flaps[Random.Range(0, flaps.Length)];
+                flap2.pitch = Random.Range(0.95f, 1.1f);
+                flap2.Play();
 
                 //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
                 rightRdy = false;
@@ -123,6 +135,8 @@ public class Player2Mvmnt : MonoBehaviour
             myRigidbody2.mass += 0.1f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
+            pickup.pitch = Random.Range(0.90f, 1.1f);
+            pickup.Play();
             //cam.transform.position += new Vector3(0, 0, -0.5f);
         }
         if (other.gameObject.CompareTag("DmgPlayer"))
@@ -134,6 +148,7 @@ public class Player2Mvmnt : MonoBehaviour
                 Destroy(other.gameObject);
 
                 points -= 10;
+                badPickup.Play();
                 //cam.transform.position -= new Vector3(0, 0, -0.5f);
                 transform.localScale -= new Vector3(0.2f, 0.2f, 0);
             }
