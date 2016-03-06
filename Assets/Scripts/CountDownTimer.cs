@@ -14,6 +14,10 @@ public class CountDownTimer : MonoBehaviour
 
     public bool gameEnd;
 
+    public PlayerMvmnt p1;
+
+    public Player2Mvmnt p2;
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +39,11 @@ public class CountDownTimer : MonoBehaviour
         {
             gameEnd = true;
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void OnGUI()
@@ -53,11 +62,11 @@ public class CountDownTimer : MonoBehaviour
             GUI.Label(new Rect(scrWidth, scrHeight, timeLabelBoxWidth, timeLabelBoxHeight), "Time's Up!", centeredStyle);
             Time.timeScale = 0; //Spillet er sat på pause
 
-            GUI.Label(new Rect(scrWidth, scrHeight + 30, timeLabelBoxWidth, timeLabelBoxHeight), "Player 1, Hit A to replay, or B to go to menu", centeredStyle);
+            GUI.Label(new Rect(scrWidth, scrHeight + 30, timeLabelBoxWidth, timeLabelBoxHeight), "Player 1, Hit A to replay", centeredStyle);
 
-            PlayerMvmnt p1 = new PlayerMvmnt();
 
-            Player2Mvmnt p2 = new Player2Mvmnt();
+            p1.GetComponent<PlayerMvmnt>();
+            p2.GetComponent<Player2Mvmnt>();
 
             if (p1.points > p2.points)
             {

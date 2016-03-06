@@ -132,9 +132,9 @@ public class Player2Mvmnt : MonoBehaviour
         {
             powerForce += 0.5f;
             Destroy(other.gameObject);
-            myRigidbody2.mass += 0.1f;
-            transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-            points += 10;
+           // myRigidbody2.mass += 0.1f;
+            transform.localScale += new Vector3(0.3f, 0.3f, 0.3f);
+            this.points += 10;
             pickup.pitch = Random.Range(0.90f, 1.1f);
             pickup.Play();
             //cam.transform.position += new Vector3(0, 0, -0.5f);
@@ -144,13 +144,13 @@ public class Player2Mvmnt : MonoBehaviour
             if (points > 0)
             {
                 powerForce -= 0.5f;
-                myRigidbody2.mass -= 0.1f;
+               // myRigidbody2.mass -= 0.1f;
                 Destroy(other.gameObject);
 
                 points -= 10;
                 badPickup.Play();
                 //cam.transform.position -= new Vector3(0, 0, -0.5f);
-                transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
             }
             else
             {

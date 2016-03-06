@@ -45,10 +45,7 @@ public class PlayerMvmnt : MonoBehaviour
         movementSpeed = 20;
         friction = 0.95f;
         chargeCD = 10;
-        myRigidbody.mass = 0.1f;
-
-
-        
+        myRigidbody.mass = 0.1f;        
     }
 
     // Update is called once per frame
@@ -61,8 +58,10 @@ public class PlayerMvmnt : MonoBehaviour
 
         if (p1Left <= -0.2) //Up
         {
+            myRigidbody.angularVelocity = new Vector3(0, 0, 0);
+
             leftRdy = true;
-            transform.Rotate(0, 0, Input.GetAxis("Left_P1"));
+            transform.Rotate(0, 0, Input.GetAxis("Left_P1") * 2);
         }
         if (p1Left >= 0.2) //Ned
 	    {
@@ -77,8 +76,12 @@ public class PlayerMvmnt : MonoBehaviour
 	    }
         if (p1Right <= -0.2)
         {
+           // myRigidbody.velocity = Vector3.zero;
+            //and if you want it to stop spinning too
+            myRigidbody.angularVelocity = new Vector3(0,0,0);
+
             rightRdy = true;
-            transform.Rotate(0, 0, -(Input.GetAxis("Right_P1")));
+            transform.Rotate(0, 0, -(Input.GetAxis("Right_P1") * 2));
         }
         if (p1Right >= 0.2)
 	    {
@@ -110,9 +113,9 @@ public class PlayerMvmnt : MonoBehaviour
         {
             powerForce += 0.5f;
             Destroy(other.gameObject);
-            myRigidbody.mass += 0.1f;
-            transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
-            points += 10;
+            //myRigidbody.mass += 0.1f;
+            transform.localScale += new Vector3(0.3f, 0.3f, 0.3f);
+            this.points += 10;
             pickup.pitch = Random.Range(0.90f, 1.15f);
             pickup.Play();
         }
@@ -121,12 +124,12 @@ public class PlayerMvmnt : MonoBehaviour
             if (points > 0)
             {
             powerForce -= 0.5f;
-            myRigidbody.mass -= 0.1f;
+           // myRigidbody.mass -= 0.1f;
             Destroy(other.gameObject);
             badPickup.Play();
 
             points -= 10;
-            transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+            transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
             }
             else
             {
