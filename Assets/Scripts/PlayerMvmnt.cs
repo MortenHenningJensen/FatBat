@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerMvmnt : MonoBehaviour
 {
     public Rigidbody myRigidbody;
-    //public Rigidbody rightWing;
+    // public Rigidbody rightWing;
     // public Rigidbody leftWing;
     private int chargeCD;
     private bool leftRdy = false;
@@ -42,13 +42,15 @@ public class PlayerMvmnt : MonoBehaviour
         myRigidbody.mass = 0.1f;
 
 
-        p1Left = Input.GetAxisRaw("Left_P1");
-        p1Right = Input.GetAxisRaw("Right_P1");
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        p1Left = Input.GetAxisRaw("Left_P1");
+        p1Right = Input.GetAxisRaw("Right_P1");
+
         txtPoints.text = "Player 1 Points: " + points.ToString();
 
         if (p1Left <= -0.2) //Up
@@ -124,11 +126,6 @@ public class PlayerMvmnt : MonoBehaviour
         {
             this.points -= 10;
         }
-    }
-
-    void DownwardsDraft()
-    {
-        transform.position -= new Vector3(0, 0.05f, 0);
     }
 }
 
