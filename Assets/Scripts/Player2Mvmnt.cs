@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Player2Mvmnt : MonoBehaviour
 {
 
-    public Rigidbody myRigidbody;
+    public Rigidbody myRigidbody2;
     //public Rigidbody rightWing;
     // public Rigidbody leftWing;
     private int chargeCD;
@@ -35,7 +35,7 @@ public class Player2Mvmnt : MonoBehaviour
         movementSpeed = 20;
         friction = 0.95f;
         chargeCD = 10;
-        myRigidbody.mass = 0.1f;
+        myRigidbody2.mass = 0.1f;
     }
 
     // Update is called once per frame
@@ -66,7 +66,7 @@ public class Player2Mvmnt : MonoBehaviour
         {
             if (leftRdy == true)
             {
-                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed);
+                myRigidbody2.AddRelativeForce(Vector3.up * movementSpeed);
                 //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
 
                 leftRdy = false;
@@ -87,7 +87,7 @@ public class Player2Mvmnt : MonoBehaviour
         {
             if (rightRdy == true)
             {
-                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed);
+                myRigidbody2.AddRelativeForce(Vector3.up * movementSpeed);
 
                 //transform.position += transform.up * Time.deltaTime * movementSpeed * 1.5f;
                 rightRdy = false;
@@ -102,7 +102,7 @@ public class Player2Mvmnt : MonoBehaviour
         {
             if (chargeCD >= 10)
             {
-                myRigidbody.AddRelativeForce(Vector3.up * movementSpeed * powerForce);
+                myRigidbody2.AddRelativeForce(Vector3.up * movementSpeed * powerForce);
                 chargeCD = 0;
             }
             else
@@ -120,35 +120,22 @@ public class Player2Mvmnt : MonoBehaviour
         {
             powerForce += 0.5f;
             Destroy(other.gameObject);
-            myRigidbody.mass += 0.1f;
+            myRigidbody2.mass += 0.1f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
             points += 10;
             //cam.transform.position += new Vector3(0, 0, -0.5f);
-
-            colliders[0].transform.position += new Vector3(-0.5f, -0.5f, 0);
-            colliders[1].transform.position += new Vector3(0.5f, 0.5f, 0);
-            colliders[2].transform.position += new Vector3(0.5f, 0.5f, 0);
-
-            colliders[0].transform.localScale += new Vector3(0, 5, 0);
-            colliders[1].transform.localScale += new Vector3(0, 5, 0);
-            colliders[2].transform.localScale += new Vector3(5, 0, 0);
-
-
         }
         if (other.gameObject.CompareTag("DmgPlayer"))
         {
             if (points > 0)
             {
                 powerForce -= 0.5f;
-                myRigidbody.mass -= 0.1f;
+                myRigidbody2.mass -= 0.1f;
                 Destroy(other.gameObject);
 
                 points -= 10;
                 //cam.transform.position -= new Vector3(0, 0, -0.5f);
                 transform.localScale -= new Vector3(0.2f, 0.2f, 0);
-                colliders[0].transform.position -= new Vector3(0.5f, 0.5f, 0);
-                colliders[1].transform.position -= new Vector3(0.5f, 0.5f, 0);
-                colliders[2].transform.position -= new Vector3(0.5f, 0.5f, 0);
             }
             else
             {
