@@ -6,9 +6,8 @@ public class FlapScript : MonoBehaviour
 
     private Vector3 tilt;
     float tiltRotation = 65.0f;
-    int direction;
+    float direction;
     public float speed;
-
     // Use this for initialization
     void Start()
     {
@@ -16,9 +15,17 @@ public class FlapScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    void FixedUpdate()
+    {
+
+
+    }
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+
+        float p1Right = Input.GetAxisRaw("Right_P1");
+
+        if (p1Right >= 0.2 || Input.GetKey(KeyCode.Joystick1Button5))
         {
             direction = 1;
             speed = 5;
@@ -31,8 +38,9 @@ public class FlapScript : MonoBehaviour
 
         }
 
+
         //Tilt of the Player in accordance with the movement.
         tilt = new Vector3(0, 0, direction * tiltRotation);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(tilt), Time.deltaTime * speed);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(tilt), Time.deltaTime * speed);
     }
 }
